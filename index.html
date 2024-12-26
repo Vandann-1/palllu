@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown - Love Theme</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffb3b3;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(255, 0, 102, 0.8), 0 0 20px rgba(255, 102, 153, 0.6) inset;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff6699, 0 0 40px #ff0066;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #800040;
+            margin-bottom: 30px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(145deg, #ff9999, #ffcccc);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 102, 153, 0.6) inset;
+        }
+
+        .calendar div {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 50%;
+            color: #ff0066;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(255, 102, 153, 0.4);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .calendar div.highlight {
+            background-color: #ff0066;
+            color: #fff;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.6);
+        }
+
+        .animate {
+            position: fixed;
+            z-index: 1000;
+            background-color: #ff0066;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 48px;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.8);
+            animation: moveUp 2s ease-in-out forwards;
+        }
+
+        @keyframes moveUp {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: scale(1);
+            }
+            100% {
+                top: 50px;
+                left: 50%;
+                transform: scale(2);
+            }
+        }
+
+        .birthday-message {
+            font-size: 36px;
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff6699, 0 0 40px #ff0033;
+            font-weight: bold;
+            margin-top: 40px;
+            display: none;
+            animation: fadeIn 2s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .redirect-button {
+            background-color: #ff6699;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: none;
+            animation: fadeIn 2s ease-in forwards;
+        }
+
+        .redirect-button:hover {
+            background-color: #ff0033;
+        }
+
+        /* Heart Animations */
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            width: 20px;
+            height: 20px;
+            background-color: #ff0066;
+            transform: rotate(45deg);
+            animation: fly 5s ease-in infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff0066;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: rotate(45deg) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(45deg) translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Generate multiple hearts */
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(3) {
+            left: 30%;
+            animation-delay: 0.5s;
+        }
+
+        .heart:nth-child(4) {
+            left: 40%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(5) {
+            left: 50%;
+            animation-delay: 1.5s;
+        }
+
+        .heart:nth-child(6) {
+            left: 60%;
+            animation-delay: 3s;
+        }
+
+        .heart:nth-child(7) {
+            left: 70%;
+            animation-delay: 0.7s;
+        }
+
+        .heart:nth-child(8) {
+            left: 80%;
+            animation-delay: 2.5s;
+        }
+
+        .heart:nth-child(9) {
+            left: 90%;
+            animation-delay: 3.5s;
+        }
+    </style>
+</head>
+<body>
+
+       <!-- Audio Element -->
+    <audio id="backgroundAudio" loop>
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <h1>💖 Birthday Countdown 💖</h1>
+        <p>The countdown to a special day!</p>
+        <div class="calendar" id="calendar"></div>
+        <p class="birthday-message" id="birthdayMessage"></p>
+        <button class="redirect-button" id="redirectButton" onclick="redirectToPhotos()">View Photos</button>
+
+         <!-- New Buttons -->
+    <button class="redirect-button" id="redirectJourneyButton" onclick="redirectToJourney()">Our Journey</button>
+    <button class="redirect-button" id="redirectWishesButton" onclick="redirectToWishes()">Special Message</button>
+       
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+
+    <script>
+   const audioFile = "/on_page.mpeg"; // Replace with your audio file path
+
+// Function to play audio
+function playAudio() {
+    const audio = new Audio(audioFile); // Create a new Audio object
+    audio.loop = true; // Enable looping
+    audio.volume = 1.0; // Set volume
+    audio.play().then(() => {
+        console.log("Audio started playing.");
+    }).catch(error => {
+        console.error("Playback failed:", error);
+        setTimeout(playAudio, 1000); // Retry playback after 1 second
+    });
+
+    // Persist audio playback across reloads
+    window.addEventListener("beforeunload", () => {
+        audio.pause(); // Pause audio to prevent errors
+    });
+}
+
+// Attempt playback repeatedly until successful
+const interval = setInterval(() => {
+    playAudio();
+    if (!document.hidden) {
+        clearInterval(interval); // Stop retries once playback starts
+    }
+}, 1000);
+
+// Ensure playback starts on user interaction
+document.body.addEventListener("click", () => {
+    playAudio();
+});
+        const calendarContainer = document.getElementById("calendar");
+        const birthdayMessage = document.getElementById("birthdayMessage");
+        const redirectButton = document.getElementById("redirectButton");
+  
+        const totalDays = 31;
+        const message = "💖 Happy Birthday, Pallu! 💖";
+        let currentDay = 1;
+        // let interval;
+
+        function generateCalendar() {
+            for (let i = 1; i <= totalDays; i++) {
+                const dayDiv = document.createElement("div");
+                dayDiv.textContent = i;
+                dayDiv.setAttribute("data-day", i);
+                calendarContainer.appendChild(dayDiv);
+            }
+        }
+
+        function startCountdown() {
+            let previousDay;
+
+            interval = setInterval(() => {
+                const currentDayDiv = document.querySelector(`[data-day="${currentDay}"]`);
+
+                if (currentDayDiv) {
+                    currentDayDiv.classList.add("highlight");
+                }
+
+                if (previousDay) {
+                    previousDay.classList.remove("highlight");
+                }
+
+                previousDay = currentDayDiv;
+
+                if (currentDay === 27) {
+                    clearInterval(interval);
+                    animateDay27(currentDayDiv);
+                }
+
+                currentDay++;
+            }, 500);
+        }
+
+        function animateDay27(dayElement) {
+            const clone = dayElement.cloneNode(true);
+            clone.classList.add("animate");
+            document.body.appendChild(clone);
+            dayElement.remove(); // Remove 27 from the calendar
+            setTimeout(() => {
+                clone.remove();
+                showBirthdayMessage();
+            }, 2000);
+        }
+
+        function showBirthdayMessage() {
+    birthdayMessage.style.display = "block";
+    birthdayMessage.textContent = message;
+    
+    // Show all redirect buttons
+    redirectButton.style.display = "inline-block";
+    document.getElementById("redirectJourneyButton").style.display = "inline-block";
+    document.getElementById("redirectWishesButton").style.display = "inline-block";
+}
+
+        function redirectToPhotos() {
+            window.location.href = "photos.html";
+        }
+        // Function to redirect to Gifts page
+function redirectToJourney() {
+    window.location.href = "journey.html";
+}
+
+// Function to redirect to Wishes page
+function redirectToWishes() {
+    window.location.href = "special_message.html";
+}
+        
+        generateCalendar();
+        window.onload = startCountdown;
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

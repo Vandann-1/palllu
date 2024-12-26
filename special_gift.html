@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #f8e3f3, #fce0f0);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px 30px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff5f8d;
+            text-shadow: 0 4px 10px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 550px;
+            text-align: center;
+            animation: fadeInText 2s ease-out forwards;
+            opacity: 0;
+        }
+
+        .message h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff5f8d;
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            opacity: 0;
+            animation: fadeInText 2s ease-out forwards;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ff5f8d;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: #ff5f8d;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 8px 25px;
+            border: 2px solid #ff5f8d;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            background-color: #ff5f8d;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Happy Birthday, My Queen Pallu!</h1>
+    </div>
+
+    <div class="message">
+        <h2>To the most special person in my life,</h2>
+        <p class="message-text">
+            Every moment with you is a gift, and today is the day I celebrate you and everything you are. Your love lights up my life in the most magical way. 
+        </p>
+        <p class="message-text">
+            I want you to know that you mean more to me than words can express. I am so grateful for every smile, every laugh, every beautiful memory we’ve created together.
+        </p>
+        <p class="message-text">
+            On this special day, my heart is full of love and joy, just for you. I hope this year brings you endless happiness, and I will be by your side for all the beautiful moments yet to come.
+        </p>
+        <p class="message-text">
+            All my love, <br> 
+            [Your Name]
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>With all my Pallu, Vandan</p>
+        <a href="#" target="_blank">Here's Your Surprise</a>
+    </div>
+
+    <script>
+        // Fade in the message content
+        window.onload = () => {
+            const messageText = document.querySelectorAll('.message-text');
+            messageText.forEach((text, index) => {
+                text.style.animationDelay = `${index * 1.5}s`;
+                text.style.animation = 'fadeInText 2s ease-out forwards';
+            });
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
